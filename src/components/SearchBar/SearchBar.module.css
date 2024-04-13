@@ -1,0 +1,23 @@
+.headerContainer {
+  background-color: #62d59a;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.headerInput {
+  margin-right: 10px;
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: none;
+}
+
+.headerBtn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #3b2b76;
+  color: white;
+}
