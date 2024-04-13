@@ -6,6 +6,7 @@ import ImageGallery from "../ImageGallery/ImageGallery";
 import Loader from "../Loader/Loader";
 import ErrorMessage from "../ErrorMessage/ErrorMessage";
 import LoadMoreBtn from "../LoadMoreBtn/LoadMoreBtn";
+import ImageModal from "../ImageModal/ImageModal";
 
 export default function App() {
   const [img, setImg] = useState([]);
@@ -13,6 +14,8 @@ export default function App() {
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
+  const [imgUrl, setImgUlr] = useState();
+  const [modal, setModal] = useState(false);
 
   const handleSubmit = async (query) => {
     try {
@@ -44,12 +47,22 @@ export default function App() {
     }
   };
 
+  const showModal = (url) => {
+    setImgUlr(url);
+    setModal(true);
+  };
+
+  const closeModal = () => {
+    setModal(false);
+  };
+
   return (
     <div>
       <SearchBar onSubmit={handleSubmit} addImg={addMoreImg} />
-      {img.length > 0 && <ImageGallery images={img} />}
+      {img.length > 0 && <ImageGallery images={img} modal={showModal} />}
       {loading && <Loader />}
       {error && <ErrorMessage />}
+      <ImageModal image={imgUrl} state={modal} close={closeModal} />
       {img.length > 0 && <LoadMoreBtn addPage={addMoreImg} />}
     </div>
   );
