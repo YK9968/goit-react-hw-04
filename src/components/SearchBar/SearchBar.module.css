@@ -8,20 +8,34 @@
 }
 
 .headerInput {
-  margin-right: 10px;
-  padding: 10px 30px;
+  padding: 10px 50px;
   border-radius: 10px;
   border: none;
+  width: 400px;
+}
+
+.headerInput:focus {
+  outline: none;
 }
 
 .headerBtn {
-  padding: 10px 20px;
+  position: absolute;
   border-radius: 10px;
   border: none;
-  background-color: #3b2b76;
-  color: white;
+  background-color: inherit;
+  color: #3b2b76;
+  left: 15px;
+  bottom: 6px;
+  cursor: pointer;
 }
 
 .headerBtn:hover {
-  background-color: #5a41b7;
+  color: #5a41b7;
+}
+
+.formContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }

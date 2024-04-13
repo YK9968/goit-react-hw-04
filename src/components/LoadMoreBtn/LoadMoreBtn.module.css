@@ -1,9 +1,11 @@
 .loadMoreBtn {
-  padding: 10px 20px;
+  padding: 10px 10px;
   border-radius: 10px;
   border: none;
   background-color: #3b2b76;
   color: white;
+  margin-bottom: 20px;
+  cursor: pointer;
 }
 
 .loadMoreBtn:hover {

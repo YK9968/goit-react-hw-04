@@ -22,7 +22,7 @@ export default function ImageModal({ image, state, close }) {
       className={css.modal}
       style={customParams}
     >
-      <img className={css.modalImg} src={image} alt="" />
+      <img className={css.modalImg} src={image} />
     </Modal>
   );
 }

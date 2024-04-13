@@ -36,7 +36,6 @@ export default function App() {
   const addMoreImg = async () => {
     try {
       setLoading(true);
-
       const newImages = await fetchImgGallery(query, page + 1);
       setImg([...img, ...newImages]);
       setPage(page + 1);
@@ -62,8 +61,8 @@ export default function App() {
       {img.length > 0 && <ImageGallery images={img} modal={showModal} />}
       {loading && <Loader />}
       {error && <ErrorMessage />}
-      <ImageModal image={imgUrl} state={modal} close={closeModal} />
       {img.length > 0 && <LoadMoreBtn addPage={addMoreImg} />}
+      <ImageModal image={imgUrl} state={modal} close={closeModal} />
     </div>
   );
 }
