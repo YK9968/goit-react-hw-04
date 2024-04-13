@@ -5,12 +5,11 @@ const API_KEY = "7yGMRxceie6BzHzBqtS3DZY0cJLr7mnIne-jqwYoVsw";
 
 export const fetchImgGallery = async (query, page) => {
   const orientationImg = "landscape";
-  const limit = 15;
   const response = axios.get("", {
     params: {
       query: query,
       page: page,
-      per_page: limit,
+      per_page: 15,
       client_id: API_KEY,
       orientation: orientationImg,
     },
