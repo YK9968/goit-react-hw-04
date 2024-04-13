@@ -21,3 +21,7 @@
   background-color: #3b2b76;
   color: white;
 }
+
+.headerBtn:hover {
+  background-color: #5a41b7;
+}
