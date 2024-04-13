@@ -33,9 +33,10 @@ export default function App() {
   const addMoreImg = async () => {
     try {
       setLoading(true);
-      setPage(page + 1);
+
       const newImages = await fetchImgGallery(query, page + 1);
       setImg([...img, ...newImages]);
+      setPage(page + 1);
     } catch {
       setError(true);
     } finally {
