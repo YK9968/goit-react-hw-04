@@ -1,0 +1,17 @@
+.loadMoreBtn {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #3b2b76;
+  color: white;
+}
+
+.loadMoreBtn:hover {
+  background-color: #5a41b7;
+}
+
+.loadMoreBtnContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -11,6 +11,7 @@ export default function SearchBar({ onSubmit }) {
       return;
     }
     onSubmit(data.trim());
+
     form.reset();
   };
 
