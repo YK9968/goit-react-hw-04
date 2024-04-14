@@ -73,7 +73,7 @@ export default function App() {
 
   return (
     <div>
-      <SearchBar onSubmit={handleSubmit} addImg={addMoreImg} />
+      <SearchBar onSubmit={handleSubmit} />
       {img.length > 0 && <ImageGallery images={img} bigImgUrl={showModal} />}
       {loading && <Loader />}
       {error && <ErrorMessage />}
