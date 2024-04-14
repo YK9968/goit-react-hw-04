@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { fetchImgGallery } from "../../render-api";
 
 import SearchBar from "../SearchBar/SearchBar";
@@ -17,33 +17,49 @@ export default function App() {
   const [imgUrl, setImgUlr] = useState();
   const [modal, setModal] = useState(false);
 
-  const handleSubmit = async (query) => {
-    try {
-      setPage(1);
-      setQuery(query);
-      setImg([]);
-      setError(false);
-      setLoading(true);
-      const images = await fetchImgGallery(query, 1);
-      setImg(images);
-    } catch {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
+  useEffect(() => {
+    const fetchData = async () => {
+      if (query !== "") {
+        try {
+          setLoading(true);
+          const images = await fetchImgGallery(query, 1);
+          setImg(images);
+          setPage(1);
+        } catch {
+          setError(true);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    fetchData();
+  }, [query]);
+
+  useEffect(() => {
+    const data = async () => {
+      if (page > 1) {
+        try {
+          setLoading(true);
+          const newImages = await fetchImgGallery(query, page);
+          setImg((prevImages) => [...prevImages, ...newImages]);
+        } catch {
+          setError(true);
+        } finally {
+          setLoading(false);
+        }
+      }
+    };
+
+    data();
+  }, [query, page]);
+
+  const handleSubmit = (query) => {
+    setQuery(query);
   };
 
-  const addMoreImg = async () => {
-    try {
-      setLoading(true);
-      const newImages = await fetchImgGallery(query, page + 1);
-      setImg([...img, ...newImages]);
-      setPage(page + 1);
-    } catch {
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
+  const addMoreImg = () => {
+    setPage((prevPage) => prevPage + 1);
   };
 
   const showModal = (url) => {
@@ -58,7 +74,7 @@ export default function App() {
   return (
     <div>
       <SearchBar onSubmit={handleSubmit} addImg={addMoreImg} />
-      {img.length > 0 && <ImageGallery images={img} modal={showModal} />}
+      {img.length > 0 && <ImageGallery images={img} bigImgUrl={showModal} />}
       {loading && <Loader />}
       {error && <ErrorMessage />}
       {img.length > 0 && <LoadMoreBtn addPage={addMoreImg} />}
