@@ -14,40 +14,22 @@ export default function App() {
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
-  const [imgUrl, setImgUlr] = useState();
+  const [imgUrl, setImgUlr] = useState(null);
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      if (query !== "") {
-        try {
-          setLoading(true);
-          const images = await fetchImgGallery(query, 1);
-          setImg(images);
-          setPage(1);
-        } catch {
-          setError(true);
-        } finally {
-          setLoading(false);
-        }
-      }
-    };
-
-    fetchData();
-  }, [query]);
-
-  useEffect(() => {
+    if (!query) {
+      return;
+    }
     const data = async () => {
-      if (page > 1) {
-        try {
-          setLoading(true);
-          const newImages = await fetchImgGallery(query, page);
-          setImg((prevImages) => [...prevImages, ...newImages]);
-        } catch {
-          setError(true);
-        } finally {
-          setLoading(false);
-        }
+      try {
+        setLoading(true);
+        const newImages = await fetchImgGallery(query, page);
+        setImg((prevImages) => [...prevImages, ...newImages]);
+      } catch {
+        setError(true);
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -56,6 +38,11 @@ export default function App() {
 
   const handleSubmit = (query) => {
     setQuery(query);
+    setImg([]);
+    setPage(1);
+    setError(false);
+    setLoading(false);
+    setImgUlr(null);
   };
 
   const addMoreImg = () => {
@@ -74,7 +61,7 @@ export default function App() {
   return (
     <div>
       <SearchBar onSubmit={handleSubmit} />
-      {img.length > 0 && <ImageGallery images={img} bigImgUrl={showModal} />}
+      {img.length > 0 && <ImageGallery images={img} onClick={showModal} />}
       {loading && <Loader />}
       {error && <ErrorMessage />}
       {img.length > 0 && <LoadMoreBtn addPage={addMoreImg} />}

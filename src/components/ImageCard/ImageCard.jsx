@@ -5,16 +5,12 @@ export default function ImageCard({
     alt_description,
     urls: { small, regular },
   },
-  bigImgUrl,
+  onClick,
 }) {
-  const updateImgUrl = () => {
-    bigImgUrl(regular);
-  };
-
   return (
     <div>
       <img
-        onClick={updateImgUrl}
+        onClick={() => onClick(regular)}
         className={css.galleriImg}
         src={small}
         alt={alt_description}
